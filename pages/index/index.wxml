@@ -1,0 +1,53 @@
+<!--index.wxml-->
+<navigation-bar title="Weixin" back="{{false}}" color="black" background="#FFF"></navigation-bar>
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="container">
+    <!-- 顶部搜索栏 -->
+    <view class="search-bar">
+      <view class="search-input">
+        <icon type="search" size="14" color="#999"></icon>
+        <input type="text" placeholder="搜索菜品" placeholder-class="search-placeholder"/>
+      </view>
+    </view>
+
+    <!-- 分类导航 -->
+    <scroll-view scroll-x class="category-nav" enhanced show-scrollbar="{{false}}">
+      <view class="category-item {{currentCategory === index ? 'active' : ''}}" 
+            wx:for="{{categories}}" 
+            wx:key="id"
+            bindtap="switchCategory"
+            data-index="{{index}}">
+        {{item.name}}
+      </view>
+    </scroll-view>
+
+    <!-- 菜品列表 -->
+    <scroll-view scroll-y class="menu-list" enhanced>
+      <view class="menu-item" wx:for="{{menuItems}}" wx:key="id">
+        <image class="dish-image" src="{{item.image}}" mode="aspectFill"></image>
+        <view class="dish-info">
+          <view class="dish-name">{{item.name}}</view>
+          <view class="dish-desc">{{item.description}}</view>
+          <view class="dish-price-wrap">
+            <text class="dish-price">¥{{item.price}}</text>
+            <view class="dish-action">
+              <view class="minus" wx:if="{{item.count > 0}}" bindtap="decreaseCount" data-id="{{item.id}}">-</view>
+              <text wx:if="{{item.count > 0}}" class="count">{{item.count}}</text>
+              <view class="plus" bindtap="increaseCount" data-id="{{item.id}}">+</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+
+    <!-- 购物车悬浮按钮 -->
+    <view class="cart-float" bindtap="navigateToCart" wx:if="{{totalCount > 0}}">
+      <view class="cart-icon">
+        <image src="/assets/icons/cart.png"></image>
+        <view class="cart-badge" wx:if="{{totalCount > 0}}">{{totalCount}}</view>
+      </view>
+      <view class="cart-price">¥{{totalPrice}}</view>
+      <view class="cart-button">去结算</view>
+    </view>
+  </view>
+</scroll-view>

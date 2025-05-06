@@ -1,0 +1,33 @@
+<!--pages/profile/profile.wxml-->
+<view class="profile-bg">
+  <view class="user-info">
+    <view class="avatar avatar-placeholder">U</view>
+    <view class="nickname">微信用户</view>
+    <view class="subtitle">欢迎使用点餐小程序</view>
+  </view>
+</view>
+
+<view class="profile-card">
+  <view class="profile-list">
+    <view class="profile-item" hover-class="item-hover" bindtap="goOrder">
+      <view class="icon icon-placeholder">单</view>
+      <text>我的订单</text>
+      <view class="arrow">›</view>
+    </view>
+    <view class="profile-item" hover-class="item-hover" bindtap="goCart">
+      <view class="icon icon-placeholder">购</view>
+      <text>我的购物车</text>
+      <view class="arrow">›</view>
+    </view>
+  </view>
+</view>
+
+<view class="profile-card">
+  <view class="profile-list">
+    <view class="profile-item" hover-class="item-hover" bindtap="showInfo">
+      <view class="icon icon-placeholder">我</view>
+      <text>个人信息</text>
+      <view class="arrow">›</view>
+    </view>
+  </view>
+</view>

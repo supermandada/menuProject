@@ -1,0 +1,30 @@
+<!--pages/order/order.wxml-->
+<view class="container">
+  <!-- 订单状态筛选栏 -->
+  <view class="order-tabs">
+    <view class="tab {{currentTab === index ? 'active' : ''}}" wx:for="{{tabs}}" wx:key="id" bindtap="switchTab" data-index="{{index}}">
+      {{item.name}}
+    </view>
+  </view>
+
+  <!-- 订单列表 -->
+  <scroll-view scroll-y class="order-list">
+    <view class="order-item" wx:for="{{orderList}}" wx:key="id">
+      <view class="order-header">
+        <text class="order-id">订单号：{{item.id}}</text>
+        <text class="order-status">{{item.status}}</text>
+      </view>
+      <view class="order-body">
+        <view class="dish-info" wx:for="{{item.dishes}}" wx:key="name">
+          <image class="dish-image" src="{{dish.image}}" mode="aspectFill"></image>
+          <view class="dish-name">{{dish.name}} × {{dish.count}}</view>
+        </view>
+      </view>
+      <view class="order-footer">
+        <text class="order-total">合计：¥{{item.total}}</text>
+        <button class="order-btn" wx:if="{{item.status === '待支付'}}" bindtap="payOrder" data-id="{{item.id}}">去支付</button>
+      </view>
+    </view>
+    <view wx:if="{{!orderList.length}}" class="empty-order">暂无订单</view>
+  </scroll-view>
+</view>

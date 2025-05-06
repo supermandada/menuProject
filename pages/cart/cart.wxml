@@ -1,0 +1,36 @@
+<view class="container">
+  <!-- 购物车为空时显示 -->
+  <view class="empty-cart" wx:if="{{!cartItems.length}}">
+    <image src="/assets/icons/empty-cart.png" mode="aspectFit"></image>
+    <text>购物车是空的</text>
+    <button class="go-shopping" bindtap="goShopping">去点餐</button>
+  </view>
+
+  <!-- 购物车有商品时显示 -->
+  <block wx:else>
+    <!-- 商品列表 -->
+    <scroll-view scroll-y class="cart-list">
+      <view class="cart-item" wx:for="{{cartItems}}" wx:key="id">
+        <image class="dish-image" src="{{item.image}}" mode="aspectFill"></image>
+        <view class="dish-info">
+          <view class="dish-name">{{item.name}}</view>
+          <view class="dish-price">¥{{item.price}}</view>
+          <view class="dish-action">
+            <view class="minus" bindtap="decreaseCount" data-id="{{item.id}}">-</view>
+            <text class="count">{{item.count}}</text>
+            <view class="plus" bindtap="increaseCount" data-id="{{item.id}}">+</view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+
+    <!-- 底部结算栏 -->
+    <view class="checkout-bar">
+      <view class="total-info">
+        <view class="total-price">合计：¥{{totalPrice}}</view>
+        <view class="total-desc">已选{{totalCount}}件商品</view>
+      </view>
+      <button class="checkout-btn" bindtap="checkout">去结算</button>
+    </view>
+  </block>
+</view> 
